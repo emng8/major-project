@@ -7,7 +7,7 @@
 
 // just testing the concept of having an initial grid, the grid with the dots, and then having the solved grid
 // intial plain grid
-let grid = [
+let gri = [
   [0, 0, 0, 0, 0], 
   [0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0],
@@ -15,7 +15,7 @@ let grid = [
   [0, 0, 0, 0, 0]
 ];
 
-let gridOne = [
+let grid = [
   [1, 2, 0, 0, 0], 
   [0, 0, 0, 1, 0],
   [3, 4, 0, 2, 0],
@@ -47,18 +47,28 @@ function setup() {
 
 function draw() {
   background(220);
-
-}
-
-function mousePressed() {
-  if (mouseX && mouseY === ) {
-
-  }
+  displayGrid();
 }
 
 function displayGrid() {
   for (let y = 0; y < GRID_ROWS; y++) {
     for (let x = 0; x < GRID_COLUMNS; x++) {
+      // displays red
+      if (grid[y][x] === RED_DOT) {
+        fill("red");
+      } 
+      // displays blue
+      else if (grid[y][x] === BLUE_DOT) {
+        fill("blue");
+      } 
+      // displays green
+      else if (grid[y][x] === GREEN_DOT) {
+        fill("green");
+      } 
+      // displays yellow
+      else if (grid[y][x] === YELLOW_DOT) {
+        fill("yellow");
+      }       
     }
   }
 }
