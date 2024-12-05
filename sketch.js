@@ -25,7 +25,7 @@ let grid = [
   [0, 3, 0, 0, 4]
 ];
 
-// how the gridd should look like when it is solved
+// how the grid should look like when it is solved
 let solvedGridOne = [
   [1, 2, 2, 2, 2], 
   [1, 1, 1, 1, 2],
@@ -35,11 +35,11 @@ let solvedGridOne = [
 ];
 
 let gridTwo = [
-  [, , 0, 0, 0, 0], 
-  [0, 0, 0, , 0, 0],
+  [0, 3, 2, 0, 0, 0], 
+  [0, 0, 0, , 0, 2],
   [, , 0, , 0, 0],
   [0, 0, 0, 0, 0, 0],
-  [0, , 0, 0, , 0],
+  [3, , 0, 0, , 0],
   [0, , 0, 0, , 0]
 ];
 
@@ -92,7 +92,31 @@ function displayGrid() {
       else if (grid[y][x] === YELLOW_DOT) {
         fill("yellow");
         square(x * cellSize, y * cellSize, cellSize);
-      }       
+      }      
+      // displays black 
+      else if (grid[y][x] === EMPTY_TILE) {
+        fill("black");
+        square(x * cellSize, y * cellSize, cellSize);
+      }      
     }
+  }
+}
+
+function mousePressed() {
+  // make the line to connect dots red
+  if (mousePressed === RED_DOT) {
+
+  }
+  // make the line to connect dots blue
+  if (mousePressed === BLUE_DOT) {
+    
+  }
+  // make the line to connect dots green
+  if (mousePressed === GREEN_DOT) {
+    
+  }
+  // make the line to connect dots yellow
+  if (mousePressed === YELLOW_DOT) {
+    
   }
 }
