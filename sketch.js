@@ -105,6 +105,10 @@ function displayGrid() {
 function mousePressed() {
   // make the line to connect dots red
   if (mousePressed === RED_DOT) {
+    let color = RED_DOT.get(mouseX, mouseY);
+    if mouseDragged() {
+      
+    }
 
   }
   // make the line to connect dots blue
