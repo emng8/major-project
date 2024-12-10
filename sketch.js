@@ -81,22 +81,27 @@ function draw() {
 function displayGrid() {
   for (let y = 0; y < GRID_ROWS; y++) {
     for (let x = 0; x < GRID_COLUMNS; x++) {
+      // displays red
       if (grid[y][x] === RED_DOT) {
         fill("red"); 
         square(x * cellSize, y * cellSize, cellSize);
       } 
+      // displays blue
       else if (grid[y][x] === BLUE_DOT) {
         fill("blue");
         square(x * cellSize, y * cellSize, cellSize);
       } 
+      // displays green
       else if (grid[y][x] === GREEN_DOT) {
         fill("green");
         square(x * cellSize, y * cellSize, cellSize);
       } 
+      // displays yellow
       else if (grid[y][x] === YELLOW_DOT) {
         fill("yellow");
         square(x * cellSize, y * cellSize, cellSize);
       }      
+      // displays black
       else if (grid[y][x] === EMPTY_TILE) {
         fill("black");
         square(x * cellSize, y * cellSize, cellSize);
