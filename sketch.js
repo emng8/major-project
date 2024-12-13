@@ -53,8 +53,8 @@ let grid = [
   [1, 2, 0, 0, 0], 
   [0, 0, 0, 1, 0],
   [3, 4, 0, 2, 0],
-  [0, 0, 0, 0, 0],
-  [0, 3, 0, 0, 4]
+  [0, 3, 0, 0, 0],
+  [0, 0, 0, 0, 4]
 ];
 
 const GRID_ROWS = grid.length;
@@ -118,11 +118,14 @@ function mousePressed() {
   // select the color when clicking on a color tile
   if (grid[gridY][gridX] === RED_DOT) {
     selectedColor = RED_DOT;
-  } else if (grid[gridY][gridX] === BLUE_DOT) {
+  } 
+  else if (grid[gridY][gridX] === BLUE_DOT) {
     selectedColor = BLUE_DOT;
-  } else if (grid[gridY][gridX] === GREEN_DOT) {
+  } 
+  else if (grid[gridY][gridX] === GREEN_DOT) {
     selectedColor = GREEN_DOT;
-  } else if (grid[gridY][gridX] === YELLOW_DOT) {
+  } 
+  else if (grid[gridY][gridX] === YELLOW_DOT) {
     selectedColor = YELLOW_DOT;
   }
 }
@@ -133,7 +136,10 @@ function mouseDragged() {
   const gridY = Math.floor(mouseY / cellSize);
   
   // if we are dragging and the tile is empty, fill it with the selected color
-  if (selectedColor != null && grid[gridY][gridX] === EMPTY_TILE) {
+  if (selectedColor !== null && grid[gridY][gridX] === EMPTY_TILE) {
     grid[gridY][gridX] = selectedColor;
+  }
+  if (grid[gridY][gridX] !== selectedColor) {
+    // make it so that the color stops if it touches the color it doesn't select
   }
 }
