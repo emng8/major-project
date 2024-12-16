@@ -73,6 +73,12 @@ function setup() {
   createCanvas(500, 500);
 }
 
+function preload() {
+  // preload for images
+  REDDOTIMG = loadImage("redDot.png");
+  BLUEDOTIMG = loadImage("blueDot.png");
+}
+
 function draw() {
   background(220);
   displayGrid();
