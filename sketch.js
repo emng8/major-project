@@ -69,6 +69,8 @@ const YELLOW_DOT = 4;
 
 let selectedColor = null;
 
+let dragCancelled = false; // tracks if the drag path is interrupted
+
 function setup() {
   createCanvas(500, 500);
 }
@@ -126,28 +128,38 @@ function mousePressed() {
   // select the color when clicking on a color tile
   if (grid[gridY][gridX] === RED_DOT) {
     selectedColor = RED_DOT;
+    dragCancelled = false;  // resets it
   } 
   else if (grid[gridY][gridX] === BLUE_DOT) {
     selectedColor = BLUE_DOT;
+    dragCancelled = false;  
   } 
   else if (grid[gridY][gridX] === GREEN_DOT) {
     selectedColor = GREEN_DOT;
+    dragCancelled = false;  
   } 
   else if (grid[gridY][gridX] === YELLOW_DOT) {
     selectedColor = YELLOW_DOT;
+    dragCancelled = false;  
   }
 }
 
 function mouseDragged() {
-  // get the tile position on the grid
-  const gridX = Math.floor(mouseX / cellSize);
-  const gridY = Math.floor(mouseY / cellSize);
-  
-  // if we are dragging and the tile is empty, fill it with the selected color
-  if (selectedColor !== null && grid[gridY][gridX] === EMPTY_TILE) {
-    grid[gridY][gridX] = selectedColor;
-  }
-  if (grid[gridY][gridX] !== selectedColor) {
-    // make it so that the color stops if it touches the color it doesn't select
+  if (selectedColor !== null && !dragCancelled) {
+    // get the tile position on the grid
+    const gridX = Math.floor(mouseX / cellSize);
+    const gridY = Math.floor(mouseY / cellSize);
+
+    // check if the tile is occupied by a color other than the selected color
+    if (grid[gridY][gridX] !== EMPTY_TILE && grid[gridY][gridX] !== selectedColor) {
+      // if a different color is encountered, stop filling and cancel the drag
+      dragCancelled = true;
+      return; // stop the drag action
+    }
+
+    // if the tile is empty, fill it with the selected color
+    if (grid[gridY][gridX] === EMPTY_TILE) {
+      grid[gridY][gridX] = selectedColor;
+    }
   }
 }
