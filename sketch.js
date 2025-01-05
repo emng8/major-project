@@ -76,11 +76,7 @@ function setup() {
 }
 
 function preload() {
-  // preload for images
-  REDDOTIMG = loadImage("redDot.png");
-  BLUEDOTIMG = loadImage("blueDot.png");
-  GREENDOTIMG = loadImage("greenDot.png");
-  YELLOWDOTIMG = loadImage("yellowDot.png");
+
 }
 
 function draw() {
