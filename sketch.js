@@ -91,34 +91,33 @@ function draw() {
 function displayGrid() {
   for (let y = 0; y < GRID_ROWS; y++) {
     for (let x = 0; x < GRID_COLUMNS; x++) {
-      // displays red
+      // draw black square as the background
+      fill("black");
+      stroke(0);  // add a border to the tiles
+      square(x * cellSize, y * cellSize, cellSize);
+
+      // display the colored circle depending on the grid value
       if (grid[y][x] === RED_DOT) {
-        fill("red"); 
-        square(x * cellSize, y * cellSize, cellSize);
+        fill("red");
+        ellipse(x * cellSize + cellSize / 2, y * cellSize + cellSize / 2, cellSize * 0.8, cellSize * 0.8);
       } 
-      // displays blue
       else if (grid[y][x] === BLUE_DOT) {
         fill("blue");
-        square(x * cellSize, y * cellSize, cellSize);
+        ellipse(x * cellSize + cellSize / 2, y * cellSize + cellSize / 2, cellSize * 0.8, cellSize * 0.8);
       } 
-      // displays green
       else if (grid[y][x] === GREEN_DOT) {
         fill("green");
-        square(x * cellSize, y * cellSize, cellSize);
+        ellipse(x * cellSize + cellSize / 2, y * cellSize + cellSize / 2, cellSize * 0.8, cellSize * 0.8);
       } 
-      // displays yellow
       else if (grid[y][x] === YELLOW_DOT) {
         fill("yellow");
-        square(x * cellSize, y * cellSize, cellSize);
-      }      
-      // displays black
-      else if (grid[y][x] === EMPTY_TILE) {
-        fill("black");
-        square(x * cellSize, y * cellSize, cellSize);
-      }      
+        ellipse(x * cellSize + cellSize / 2, y * cellSize + cellSize / 2, cellSize * 0.8, cellSize * 0.8);
+      }
+      // no circle if the tile is empty
     }
   }
 }
+
 
 function mousePressed() {
   // get the tile position on the grid
