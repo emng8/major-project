@@ -83,9 +83,10 @@ function preload() {
 }
 
 function draw() {
-  startScreen();
-  // background(220);
-  // displayGrid();
+  // startScreen();
+  background(220);
+  displayGrid();
+  connectDotsWithRects();
 }
 
 function gameStage() {
@@ -103,6 +104,7 @@ function startScreen() {
 }
 
 function displayGrid() {
+  strokeWeight(1);
   for (let y = 0; y < GRID_ROWS; y++) {
     for (let x = 0; x < GRID_COLUMNS; x++) {
       // draw black square as the background
@@ -130,6 +132,22 @@ function displayGrid() {
       // no circle if the tile is empty
     }
   }
+}
+
+function connectDotsWithRects() {
+  fill("green");
+  ellipse(0 * cellSize + cellSize / 2, 3 * cellSize + cellSize / 2, cellSize * 0.8, cellSize * 0.8);
+
+  let p1 = {};
+  p1.x = 0 * cellSize + cellSize / 2;
+  p1.y = 2 * cellSize + cellSize / 2;
+  let p2 = {};
+  p2.x = 0 * cellSize + cellSize / 2;
+  p2.y = 3 * cellSize + cellSize / 2;
+
+  stroke("green");
+  strokeWeight(cellSize * 0.8);
+  line(p1.x, p1.y, p2.x, p2.y);
 }
 
 
