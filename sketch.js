@@ -71,6 +71,9 @@ let selectedColor = null;
 
 let dragCancelled = false; // tracks if the drag path is interrupted
 
+// start screen 
+let stage = 0; 
+
 function setup() {
   createCanvas(500, 500);
 }
@@ -80,8 +83,23 @@ function preload() {
 }
 
 function draw() {
-  background(220);
-  displayGrid();
+  startScreen();
+  // background(220);
+  // displayGrid();
+}
+
+function gameStage() {
+  // show start screen 
+  if (stage === 0) {
+    startScreen();
+  }
+}
+
+function startScreen() {
+  background(0);
+  fill(255);
+  textSize(50);
+  text('FLOW FREE', 110, 140);
 }
 
 function displayGrid() {
