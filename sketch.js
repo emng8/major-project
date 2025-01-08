@@ -83,10 +83,10 @@ function preload() {
 }
 
 function draw() {
-  // startScreen();
-  background(220);
-  displayGrid();
-  connectDotsWithRects();
+  startScreen();
+  // background(220);
+  // displayGrid();
+  // connectDotsWithRects();
 }
 
 function gameStage() {
@@ -101,6 +101,9 @@ function startScreen() {
   fill(255);
   textSize(50);
   text('FLOW FREE', 110, 140);
+   
+
+  ellipse(250, 300, 150, 150);
 }
 
 function displayGrid() {
@@ -149,7 +152,6 @@ function connectDotsWithRects() {
   strokeWeight(cellSize * 0.8);
   line(p1.x, p1.y, p2.x, p2.y);
 }
-
 
 function mousePressed() {
   // get the tile position on the grid
