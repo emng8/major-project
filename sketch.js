@@ -94,6 +94,24 @@ function gameStage() {
   if (stage === 0) {
     startScreen();
   }
+
+  // show game levels
+  if (stage === 1) {
+    levelScreen();
+  }
+
+  if (mouseIsPressed === true) {
+    stage = 1;
+  }
+
+}
+
+function keyPressed() {
+  // level 1
+  if (key === "1") {
+    let
+  }
+
 }
 
 function startScreen() {
@@ -104,6 +122,10 @@ function startScreen() {
    
 
   ellipse(250, 300, 150, 150);
+}
+
+function levelScreen() {
+  background(0);
 }
 
 function displayGrid() {
