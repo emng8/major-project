@@ -84,6 +84,21 @@ function startScreen() {
   }
 }
 
+function levelScreen() {
+  background(0);
+  fill(255);
+  textSize(25);
+  textAlign(CENTER, CENTER);
+  text("PRESS A NUMBER TO SELECT A LEVEL", width / 2, 100);
+
+  textSize(20);
+  text("1: Level 1 (4x4)", width / 2, 180);
+  text("2: Level 2 (5x5)", width / 2, 220);
+  text("3: Level 3 (6x6)", width / 2, 260);
+  text("4: Level 4 (7x7)", width / 2, 300);
+  text("5: Level 5 (8x8)", width / 2, 340);
+}
+
   }
 }
 
