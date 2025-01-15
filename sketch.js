@@ -25,6 +25,10 @@ function setup() {
 }
 
 function draw() {
+  gameStage();
+}
+
+function gameStage() {
   if (stage === 0) {
     startScreen();
   } 
