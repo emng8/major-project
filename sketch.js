@@ -16,7 +16,7 @@ const YELLOW_DOT = 4;
 
 let selectedColor = null;
 let grid = []; // Holds the current grid
-let stage = 0; // 0 = Start Screen, 1 = Level Selection, 2 = Game Screen
+let stage = 0; // 0 = Start Screen, 1 = Level Selection, 2 = Game Screen, 3 = Completed Level
 let dragCancelled = false; // tracks if the drag path is interrupted
 
 function setup() {
@@ -35,6 +35,8 @@ function draw() {
   
   if (stage === 2) {
     displayGrid();
+  if (stage === 3) {
+    completedLevelScreen();
   }
 }
 
@@ -97,6 +99,15 @@ function levelScreen() {
   text("3: Level 3 (6x6)", width / 2, 260);
   text("4: Level 4 (7x7)", width / 2, 300);
   text("5: Level 5 (8x8)", width / 2, 340);
+}
+
+
+function completedLevelScreen() {
+  background(0);
+  fill(255);
+  textSize(50);
+  textAlign(CENTER, CENTER);
+  text("LEVEL COMPLETED!", width / 2, height / 2);
 }
 
 function displayGrid() {
