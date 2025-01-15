@@ -159,14 +159,28 @@ function mousePressed() {
 }
 
 function mouseDragged() {
-  if (selectedColor !== null && !dragCancelled) {
-    // get the tile position on the grid
-    const gridX = Math.floor(mouseX / cellSize);
-    const gridY = Math.floor(mouseY / cellSize);
+  const GRID_ROWS = grid.length;
+  const GRID_COLUMNS = grid[0].length;
 
-    // check if the tile is occupied by a color other than the selected color
+  const offsetX = (width - GRID_COLUMNS * cellSize) / 2;
+  const offsetY = (height - GRID_ROWS * cellSize) / 2;
+
+  // get the tile position on the grid
+  const gridX = Math.floor((mouseX - offsetX) / cellSize);
+  const gridY = Math.floor((mouseY - offsetY) / cellSize);
+
+  if ( 
+    gridY >= 0 &&
+    gridY < GRID_ROWS &&
+    gridX >= 0 &&
+    gridX < GRID_COLUMNS &&
+    selectedColor !== null &&
+    !dragCancelled
+  ) 
+
+  {
     if (grid[gridY][gridX] !== EMPTY_TILE && grid[gridY][gridX] !== selectedColor) {
-      // if a different color is encountered, stop filling and cancel the drag
+       // if a different color is encountered, stop filling and cancel the drag
       dragCancelled = true;
       return; // stop the drag action
     }
