@@ -66,6 +66,24 @@ function keyPressed() {
   }
 }
 
+function startScreen() {
+  background(0);
+  fill(255);
+  textSize(50);
+  textAlign(CENTER, CENTER);
+  text("FLOW FREE", width / 2, height / 3);
+
+  fill(255);
+  ellipse(width / 2, (2 * height) / 3, 150, 150);
+
+  textSize(20);
+  text("Click to start", width / 2, (2 * height) / 3 + 100);
+
+  if (mouseIsPressed) {
+    stage = 1; // move to level selection screen
+  }
+}
+
   }
 }
 
