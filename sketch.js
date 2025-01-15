@@ -46,23 +46,27 @@ function gameStage() {
 }
 
 function keyPressed() {
-  // level 1
+  // change grid based on key press and switch to game stage
   if (key === "1") {
-    levelOne(); 
-  }
-
+    levelOne();
+    stage = 2;
+  } 
+  
   if (key === "2") {
     levelTwo();
-  }
-
+    stage = 2;
+  } 
+  
   if (key === "3") {
     levelThree();
-  }
-
+    stage = 2;
+  } 
+  
   if (key === "4") {
     levelFour();
-  }
-
+    stage = 2;
+  } 
+  
   if (key === "5") {
     levelFive();
   }
@@ -109,8 +113,6 @@ function levelFour() {
     [0, 3, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 4, 0, 0],
   ];
-  displayGrid(); 
-
 }
 
 function levelFive() {
@@ -132,9 +134,11 @@ function mousePressed() {
   const offsetX = (width - GRID_COLUMNS * cellSize) / 2;
   const offsetY = (height - GRID_ROWS * cellSize) / 2;
 
+   // get the tile position on the grid
   const gridX = Math.floor((mouseX - offsetX) / cellSize);
   const gridY = Math.floor((mouseY - offsetY) / cellSize);
 
+  // select the color when clicking on a color tile
   if (gridY >= 0 && gridY < GRID_ROWS && gridX >= 0 && gridX < GRID_COLUMNS) {
     if (grid[gridY][gridX] === RED_DOT) {
       selectedColor = RED_DOT;
