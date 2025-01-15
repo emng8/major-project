@@ -35,6 +35,9 @@ function draw() {
   
   if (stage === 2) {
     displayGrid();
+    checkCompletion(); // Check if the current grid matches the completed grid
+  }
+
   if (stage === 3) {
     completedLevelScreen();
   }
@@ -171,6 +174,18 @@ function displayGrid() {
       }
     }
   }
+}
+
+function checkCompletion() {
+  for (let y = 0; y < grid.length; y++) {
+    for (let x = 0; x < grid[0].length; x++) {
+      if (grid[y][x] !== completedGrid[y][x]) {
+        return false; // Grid does not match the completed grid
+      }
+    }
+  }
+  stage = 3; // change to completed level screen if it matches
+  return true;
 }
 
 // Define grids for each level
