@@ -284,7 +284,7 @@ function levelFive() {
   completedGrid = [
     [1, 1, 1, 1, 3, 3, 3, 3],
     [1, 2, 2, 1, 3, 3, 2, 3],
-    [1, 4, 2, 1, 2, 2, 2, 3]
+    [1, 4, 2, 1, 2, 2, 2, 3],
     [1, 4, 2, 1, 2, 3, 3, 3],
     [1, 4, 2, 1, 2, 3, 3, 4],
     [1, 4, 2, 2, 2, 3, 3, 4],
@@ -300,7 +300,7 @@ function mousePressed() {
   const offsetX = (width - GRID_COLUMNS * cellSize) / 2;
   const offsetY = (height - GRID_ROWS * cellSize) / 2;
 
-   // get the tile position on the grid
+  // get the tile position on the grid
   const gridX = Math.floor((mouseX - offsetX) / cellSize);
   const gridY = Math.floor((mouseY - offsetY) / cellSize);
 
@@ -350,7 +350,7 @@ function mouseDragged() {
 
   {
     if (grid[gridY][gridX] !== EMPTY_TILE && grid[gridY][gridX] !== selectedColor) {
-       // if a different color is encountered, stop filling and cancel the drag
+      // if a different color is encountered, stop filling and cancel the drag
       dragCancelled = true;
       return; // stop the drag action
     }
