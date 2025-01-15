@@ -99,6 +99,66 @@ function levelScreen() {
   text("5: Level 5 (8x8)", width / 2, 340);
 }
 
+function displayGrid() {
+  background(0);
+  const GRID_ROWS = grid.length;
+  const GRID_COLUMNS = grid[0].length;
+
+  // Calculate the top-left corner to center the grid
+  const offsetX = (width - GRID_COLUMNS * cellSize) / 2;
+  const offsetY = (height - GRID_ROWS * cellSize) / 2;
+
+  strokeWeight(1);
+  for (let y = 0; y < GRID_ROWS; y++) {
+    for (let x = 0; x < GRID_COLUMNS; x++) {
+      // Draw black squares as the grid background
+      fill("black");
+      stroke(255);
+      square(offsetX + x * cellSize, offsetY + y * cellSize, cellSize);
+    
+      noStroke(); 
+
+      // Draw colored circles based on grid values
+      if (grid[y][x] === RED_DOT) {
+        fill("red");
+        ellipse(
+          offsetX + x * cellSize + cellSize / 2,
+          offsetY + y * cellSize + cellSize / 2,
+          cellSize * 0.8,
+          cellSize * 0.8
+        );
+      } 
+      
+      else if (grid[y][x] === BLUE_DOT) {
+        fill("blue");
+        ellipse(
+          offsetX + x * cellSize + cellSize / 2,
+          offsetY + y * cellSize + cellSize / 2,
+          cellSize * 0.8,
+          cellSize * 0.8
+        );
+      } 
+      
+      else if (grid[y][x] === GREEN_DOT) {
+        fill("green");
+        ellipse(
+          offsetX + x * cellSize + cellSize / 2,
+          offsetY + y * cellSize + cellSize / 2,
+          cellSize * 0.8,
+          cellSize * 0.8
+        );
+      } 
+      
+      else if (grid[y][x] === YELLOW_DOT) {
+        fill("yellow");
+        ellipse(
+          offsetX + x * cellSize + cellSize / 2,
+          offsetY + y * cellSize + cellSize / 2,
+          cellSize * 0.8,
+          cellSize * 0.8
+        );
+      }
+    }
   }
 }
 
