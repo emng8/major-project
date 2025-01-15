@@ -213,6 +213,17 @@ function startScreen() {
 
 function levelScreen() {
   background(0);
+  fill(255);
+  textSize(25);
+  text('USE THE NUMBERS ON THE KEYBOARD', 10, 100);
+  text('TO CHOOSE YOUR LEVEL!', 90, 140);
+
+  textSize(35);
+  text('Level 1: 4x4', 150, 200);
+  text('Level 2: 5x5', 150, 250);
+  text('Level 3: 6x6', 150, 300);
+  text('Level 4: 7x7', 150, 350);
+  text('Level 5: 8x8', 150, 400);
 }
 
 function displayGrid() {
