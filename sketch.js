@@ -125,33 +125,36 @@ function levelFive() {
   ];
 }
 
-    }
-  }
-}
-
-
 function mousePressed() {
+  const GRID_ROWS = grid.length;
+  const GRID_COLUMNS = grid[0].length;
 
-  // get the tile position on the grid
-  const gridX = Math.floor(mouseX / cellSize);
-  const gridY = Math.floor(mouseY / cellSize);
-  
-  // select the color when clicking on a color tile
-  if (grid[gridY][gridX] === RED_DOT) {
-    selectedColor = RED_DOT;
-    dragCancelled = false;  // resets it
-  } 
-  else if (grid[gridY][gridX] === BLUE_DOT) {
-    selectedColor = BLUE_DOT;
-    dragCancelled = false;  
-  } 
-  else if (grid[gridY][gridX] === GREEN_DOT) {
-    selectedColor = GREEN_DOT;
-    dragCancelled = false;  
-  } 
-  else if (grid[gridY][gridX] === YELLOW_DOT) {
-    selectedColor = YELLOW_DOT;
-    dragCancelled = false;  
+  const offsetX = (width - GRID_COLUMNS * cellSize) / 2;
+  const offsetY = (height - GRID_ROWS * cellSize) / 2;
+
+  const gridX = Math.floor((mouseX - offsetX) / cellSize);
+  const gridY = Math.floor((mouseY - offsetY) / cellSize);
+
+  if (gridY >= 0 && gridY < GRID_ROWS && gridX >= 0 && gridX < GRID_COLUMNS) {
+    if (grid[gridY][gridX] === RED_DOT) {
+      selectedColor = RED_DOT;
+      dragCancelled = false;
+    } 
+    
+    else if (grid[gridY][gridX] === BLUE_DOT) {
+      selectedColor = BLUE_DOT;
+      dragCancelled = false;
+    } 
+    
+    else if (grid[gridY][gridX] === GREEN_DOT) {
+      selectedColor = GREEN_DOT;
+      dragCancelled = false;
+    } 
+    
+    else if (grid[gridY][gridX] === YELLOW_DOT) {
+      selectedColor = YELLOW_DOT;
+      dragCancelled = false;
+    }
   }
 }
 
