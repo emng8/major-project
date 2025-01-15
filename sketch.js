@@ -109,8 +109,14 @@ function gameStage() {
 function keyPressed() {
   // level 1
   if (key === "1") {
-    let
+  
   }
+
+  if (key === "2") {
+
+  }
+
+  
 
 }
 
