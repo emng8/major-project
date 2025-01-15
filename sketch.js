@@ -76,6 +76,7 @@ let stage = 0;
 
 function setup() {
   createCanvas(500, 500);
+  noStroke();
 }
 
 function preload() {
@@ -87,6 +88,7 @@ function draw() {
   // background(220);
   // displayGrid();
   // connectDotsWithRects();
+  gameStage();
 }
 
 function gameStage() {
@@ -95,13 +97,14 @@ function gameStage() {
     startScreen();
   }
 
-  // show game levels
+  // show level screen
   if (stage === 1) {
     levelScreen();
   }
 
-  if (mouseIsPressed === true) {
-    stage = 1;
+  // transition from start screen to level screen when mouse is clicked
+  if (stage === 0 && mouseIsPressed) {
+    stage = 1; // change to stage 1 when the screen is clicked
   }
 
 }
