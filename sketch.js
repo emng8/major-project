@@ -109,14 +109,92 @@ function gameStage() {
 function keyPressed() {
   // level 1
   if (key === "1") {
-  
+    levelOne(); 
   }
 
   if (key === "2") {
-
+    levelTwo();
   }
 
+  if (key === "3") {
+    levelThree();
+  }
+
+  if (key === "4") {
+    levelFour();
+  }
+
+  if (key === "5") {
+    levelFive();
+  }
+}
+
+function levelOne(); {
+  let grid = [
+    [1, 2, 0, 0], 
+    [0, 0, 0, 1],
+    [3, 4, 0, 2],
+    [0, 3, 0, 0],
+  ];
+
+  displayGrid();
   
+}
+
+function levelTwo() {
+  let grid = [
+    [1, 2, 0, 0, 0], 
+    [0, 0, 0, 1, 0],
+    [3, 4, 0, 2, 0],
+    [0, 3, 0, 0, 0],
+    [0, 0, 0, 0, 4]
+  ];
+
+  displayGrid();
+
+}
+
+function levelThree() {
+  let grid = [
+    [1, 2, 0, 0, 0, 0], 
+    [0, 0, 0, 1, 0, 0],
+    [3, 4, 0, 2, 0, 0],
+    [0, 3, 0, 0, 0, 0],
+    [0, 3, 0, 0, 0, 0],
+    [0, 0, 0, 0, 4, 0]
+  ];
+
+  displayGrid();
+
+}
+
+function levelFour() {
+  let grid = [
+    [1, 2, 0, 0, 0, 0, 0], 
+    [0, 0, 0, 1, 0, 0, 0],
+    [3, 4, 0, 2, 0, 0, 0],
+    [0, 3, 0, 0, 0, 0, 0],
+    [0, 3, 0, 0, 0, 0, 0],
+    [0, 3, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 4, 0, 0]
+  ];
+
+  displayGrid(); 
+
+}
+
+function levelFive() {
+  let grid = [
+    [1, 2, 0, 0, 0, 0, 0, 0], 
+    [0, 0, 0, 1, 0, 0, 0, 0],
+    [3, 4, 0, 2, 0, 0, 0, 0],
+    [0, 3, 0, 0, 0, 0, 0, 0],
+    [0, 3, 0, 0, 0, 0, 0, 0],
+    [0, 3, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 4, 0, 0, 0]
+  ];
+
+  displayGrid(); 
 
 }
 
