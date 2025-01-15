@@ -17,7 +17,7 @@ const YELLOW_DOT = 4;
 let selectedColor = null;
 let grid = []; // Holds the current grid
 let stage = 0; // 0 = Start Screen, 1 = Level Selection, 2 = Game Screen
-let dragCancelled = false;
+let dragCancelled = false; // tracks if the drag path is interrupted
 
 function setup() {
   createCanvas(500, 500);
@@ -25,23 +25,16 @@ function setup() {
 }
 
 function draw() {
-  gameStage();
-}
-
-function gameStage() {
-  // show start screen 
   if (stage === 0) {
     startScreen();
-  }
+  } 
 
-  // show level screen
   if (stage === 1) {
     levelScreen();
-  }
-
-  // transition from start screen to level screen when mouse is clicked
-  if (stage === 0 && mouseIsPressed) {
-    stage = 1; // change to stage 1 when the screen is clicked
+  } 
+  
+  if (stage === 2) {
+    displayGrid();
   }
 }
 
@@ -69,6 +62,10 @@ function keyPressed() {
   
   if (key === "5") {
     levelFive();
+    stage = 2;
+  }
+}
+
   }
 }
 
