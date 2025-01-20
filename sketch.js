@@ -83,10 +83,10 @@ function startScreen() {
   text("FLOW FREE", width / 2, height / 3);
 
   fill(255);
-  ellipse(width / 2, (2 * height) / 3, 150, 150);
+  ellipse(width / 2, 2 * height / 3, 150, 150);
 
   textSize(20);
-  text("Click to start", width / 2, (2 * height) / 3 + 100);
+  text("Click to start", width / 2, 2 * height / 3 + 100);
 
   if (mouseIsPressed) {
     stage = 1; // move to level selection screen
@@ -346,9 +346,7 @@ function mouseDragged() {
     gridX < GRID_COLUMNS &&
     selectedColor !== null &&
     !dragCancelled
-  ) 
-
-  {
+  ) {
     if (grid[gridY][gridX] !== EMPTY_TILE && grid[gridY][gridX] !== selectedColor) {
       // if a different color is encountered, stop filling and cancel the drag
       dragCancelled = true;
