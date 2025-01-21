@@ -106,17 +106,47 @@ function startScreen() {
 
 function levelScreen() {
   background(0);
+  
   fill(255);
   textSize(25);
   textAlign(CENTER, CENTER);
-  text("PRESS A NUMBER TO SELECT A LEVEL", width / 2, 100);
+  text("PRESS A NUMBER TO SELECT A LEVEL", width / 2, 80);
 
-  textSize(20);
-  text("1: Level 1 (4x4)", width / 2, 180);
-  text("2: Level 2 (5x5)", width / 2, 220);
-  text("3: Level 3 (6x6)", width / 2, 260);
-  text("4: Level 4 (7x7)", width / 2, 300);
-  text("5: Level 5 (8x8)", width / 2, 340);
+  // colors for the background rectangles
+  let colors = ['red', 'yellow', 'green', 'blue'];
+  
+  // positions for each level option
+  let levels = [
+    { text: "1: Level 1 (4x4)", y: 140 },
+    { text: "2: Level 2 (5x5)", y: 210 },
+    { text: "3: Level 3 (6x6)", y: 280 },
+    { text: "4: Level 4 (7x7)", y: 350 },
+    { text: "5: Level 5 (8x8)", y: 420 }
+  ];
+
+  // draw the colored rectangles and text for each level
+  for (let i = 0; i < levels.length; i++) {
+    // draw the rectangle behind the text
+    fill(colors[i % colors.length]);  // cycle through colors
+    let rectWidth = textWidth(levels[i].text) + 40;  // add padding around the text (increased padding)
+    let rectHeight = 50;
+    let rectX = width / 2 - rectWidth / 2;
+    let rectY = levels[i].y - rectHeight / 2;
+    
+    rect(rectX, rectY, rectWidth, rectHeight, 10);  // draw rounded rectangle
+    
+    // draw the white border around the rectangle
+    stroke(255);
+    strokeWeight(2);
+    noFill();
+    rect(rectX, rectY, rectWidth, rectHeight, 10);  // Draw border
+    
+    // draw the text on top of the rectangle
+    noStroke();
+    fill(0);
+    textSize(25);
+    text(levels[i].text, width / 2, levels[i].y);
+  }
 }
 
 
