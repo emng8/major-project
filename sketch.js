@@ -77,6 +77,10 @@ function keyPressed() {
 
 function startScreen() {
   background(0);
+  textSize(22);
+  text('🔴🟡🟢🔵🔴🟡🟢🔵🔴🟡🟢🔵🔴🟡🟢🔵', 250, 30);
+  text('🔴🟡🟢🔵🔴🟡🟢🔵🔴🟡🟢🔵🔴🟡🟢🔵', 250, 470);
+
   textSize(50);
   textAlign(CENTER, CENTER);
   let colors = ['red', 'yellow', 'green', 'blue'];
