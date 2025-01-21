@@ -27,15 +27,17 @@ let waitForCompletion = false;
 // tracks if the drag path is interrupted
 let dragCancelled = false;
 
-// variable for music
+// variables for music
 let music;
 let musicPlayed = false;
 
 function preload() {
+  // preload music
   music = loadSound('music.mp3');
 }
 
 function setup() {
+  // setup canvas and music
   createCanvas(500, 500);
   noStroke();
   music.amp(0.5);
@@ -50,13 +52,14 @@ function gameStage() {
   // show start screen
   if (stage === 0) {
     startScreen();
-
-    // plays music
-    if (!musicPlayed) {
-      music.loop();
-      musicPlayed = true;
-    }
   } 
+
+  // plays music
+  if (stage === 0 && !musicPlayed) {
+    userStartAudio();
+    music.loop();
+    musicPlayed = true;
+  }
 
   // show level screen
   if (stage === 1) {
@@ -441,7 +444,6 @@ function checkCompletion() {
   if (waitForCompletion && millis() - levelCompletionTime >= 2000) {
     stage = 3;
   }
-
   return true;
 }
 
