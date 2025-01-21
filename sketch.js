@@ -18,6 +18,8 @@ let selectedColor = null;
 let grid = []; // Holds the current grid
 let stage = 0; // 0 = Start Screen, 1 = Level Selection, 2 = Game Screen, 3 = Completed Level
 let dragCancelled = false; // tracks if the drag path is interrupted
+let startTime = 0; // timer start time in millis
+let elapsedTime = 0; // elapsed time in seconds
 
 function setup() {
   createCanvas(500, 500);
@@ -39,6 +41,7 @@ function gameStage() {
   
   if (stage === 2) {
     displayGrid();
+    displayTimer(); // display timer
     checkCompletion(); // Check if the current grid matches the completed grid
   }
 
@@ -52,26 +55,31 @@ function keyPressed() {
   if (key === "1") {
     levelOne();
     stage = 2;
+    startTime = millis(); // start the timer
   } 
   
   if (key === "2") {
     levelTwo();
     stage = 2;
+    startTime = millis();
   } 
   
   if (key === "3") {
     levelThree();
     stage = 2;
+    startTime = millis();
   } 
   
   if (key === "4") {
     levelFour();
     stage = 2;
+    startTime = millis();
   } 
   
   if (key === "5") {
     levelFive();
     stage = 2;
+    startTime = millis();
   }
 }
 
@@ -147,6 +155,17 @@ function levelScreen() {
     textSize(25);
     text(levels[i].text, width / 2, levels[i].y);
   }
+}
+
+function displayTimer() {
+  // calculate elapsed time
+  elapsedTime = int((millis() - startTime) / 1000);  // convert to seconds
+  
+  // timer characteristics
+  fill(255);
+  textSize(30);
+  textAlign(RIGHT, TOP);
+  text("Time: " + elapsedTime + "s", width - 25, 25);
 }
 
 
