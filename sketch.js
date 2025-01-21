@@ -21,6 +21,7 @@ let dragCancelled = false; // tracks if the drag path is interrupted
 let startTime = 0; // timer start time in millis
 let elapsedTime = 0; // elapsed time in seconds
 
+let levelStartTime = 0; // to store the time when the level starts
 let levelCompletionTime = 0;  // to store the time when the level is completed
 let waitForCompletion = false;  // flag to indicate whether to wait for 5 seconds
 
@@ -177,7 +178,14 @@ function completedLevelScreen() {
   fill(255);
   textSize(50);
   textAlign(CENTER, CENTER);
-  text("LEVEL COMPLETED!", width / 2, height / 2);
+  text("LEVEL COMPLETED!", width / 2, height / 2 - 50);
+
+  // Calculate the time taken to complete the level
+  let timeTaken = (levelCompletionTime - levelStartTime) / 1000; // Convert milliseconds to seconds
+
+  // Display the time taken (rounded to nearest integer)
+  textSize(30);
+  text(`Time: ${Math.round(timeTaken)} seconds`, width / 2, height / 2 + 50);
 }
 
 function displayGrid() {
