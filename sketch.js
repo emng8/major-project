@@ -5,7 +5,6 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
-
 const cellSize = 50;
 
 const EMPTY_TILE = 0;
@@ -96,21 +95,43 @@ function startScreen() {
   text('🔴🟡🟢🔵🔴🟡🟢🔵🔴🟡🟢🔵🔴🟡🟢🔵', 250, 470);
 
   textSize(50);
+  noStroke();
+  textStyle(BOLD);
   textAlign(CENTER, CENTER);
   let colors = ['red', 'yellow', 'green', 'blue'];
   let word = "FLOW FREE";
   
   for (let i = 0; i < word.length; i++) {
     fill(colors[i % colors.length]);  // Cycle through the colors
-    text(word[i], textWidth(word) / 2.5 + textWidth(word.substring(0, i)), height / 3);
+    text(word[i], textWidth(word) / 2.5 + textWidth(word.substring(0, i)), height / 3 - 30);
   }
 
-  fill(255);
-  ellipse(width / 2, 2 * height / 3, 150, 150);
+    // Draw the "Play Again" button
+  fill(255, 0, 0);  // Red background
+  rect(150, 200, 200, 50, 10);  // Draw the rectangle with rounded corners
 
-  fill(0);
+  // Add white border to the button
+  stroke(255);
+  strokeWeight(2);
+  noFill();
+  rect(150, 200, 200, 50, 10, 10);
+
+  // ellipse(width / 2, 2 * height / 3, 150, 150);
+
+  fill(255);
   textSize(15);
-  text("CLICK TO START", width / 2, 2 * height / 3);
+  noStroke();
+  text("CLICK TO START", width / 2, 225);
+  
+  fill(255);
+  textSize(13);
+  // textAlign(CENTER, CENTER);
+
+  text('Connect dots of the same color by clicking and dragging your mouse.', 250, 300);
+  text('Do not let the colors intersect and make sure that the entire grid is filled.', 250, 330);
+  
+  textSize(22);
+  text('🎮HAVE FUN PLAYING!🎮', 250, 400);
 
   // transition to level selection screen when clicked
   if (mouseIsPressed) {
@@ -169,9 +190,9 @@ function displayTimer() {
   
   // timer characteristics
   fill(255);
-  textSize(30);
+  textSize(27);
   textAlign(RIGHT, TOP);
-  text("Time: " + elapsedTime + "s", width - 25, 25);
+  text("Time: " + elapsedTime + "s", width - 20, 15);
 }
 
 
@@ -192,7 +213,7 @@ function completedLevelScreen() {
   textSize(25);
   text(`Time taken to complete level: ${Math.round(timeTaken)-2} seconds`, width / 2, height / 2);
   
-   // Draw the "Play Again" button
+  // Draw the "Play Again" button
   fill(255, 0, 0);  // Red background
   rect(150, 320, 200, 50, 10);  // Draw the rectangle with rounded corners
   
@@ -205,7 +226,7 @@ function completedLevelScreen() {
   // Display the text on the button
   noStroke();
   fill(255);
-  textSize(17);
+  textSize(16);
   text("Click here to play again!", width / 2, 347);
   
   if (mouseIsPressed) {
