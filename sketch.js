@@ -1,30 +1,32 @@
-// Flow Free
+// Flow Free Game - Final Project 
 // Emily Ng
-// Date
-//
-// Extra for Experts:
-// - describe what you did to take this project "above and beyond"
+// Tuesday, January 21, 2025
 
+// grid characteristics
+let grid = []; 
 const cellSize = 50;
-
 const EMPTY_TILE = 0;
+
+// dot characteristics
+let selectedColor = null;
 const RED_DOT = 1;
 const BLUE_DOT = 2;
 const GREEN_DOT = 3;
 const YELLOW_DOT = 4;
 
-let selectedColor = null;
-let grid = []; // Holds the current grid
-let stage = 0; // 0 = Start Screen, 1 = Level Selection, 2 = Game Screen, 3 = Completed Level
-let dragCancelled = false; // tracks if the drag path is interrupted
-let startTime = 0; // timer start time in millis
-let elapsedTime = 0; // elapsed time in seconds
+// start screen
+let stage = 0; 
 
-let levelStartTime = 0; // to store the time when the level starts
-let levelCompletionTime = 0;  // to store the time when the level is completed
-let waitForCompletion = false;  // flag to indicate whether to wait for 5 seconds
+// setting and storing timer characteristics
+let startTime = 0; 
+let elapsedTime = 0; 
+let levelStartTime = 0; 
+let levelCompletionTime = 0; 
+let waitForCompletion = false;  
 
-// let buttonRect = { x: 150, y: 320, width: 200, height: 50 }; // coordinates and dimensions for the "play again" button
+// tracks if the drag path is interrupted
+let dragCancelled = false;
+
 
 function setup() {
   createCanvas(500, 500);
@@ -32,68 +34,42 @@ function setup() {
 }
 
 function draw() {
+  // calling function to play game 
   gameStage();
 }
 
 function gameStage() {
+  // show start screen
   if (stage === 0) {
     startScreen();
   } 
 
+  // show level screen
   if (stage === 1) {
     levelScreen();
   } 
   
+  // show chosen game level
   if (stage === 2) {
     displayGrid();
-    displayTimer(); // display timer
-    checkCompletion(); // Check if the current grid matches the completed grid
+    displayTimer(); 
+    checkCompletion();
   }
 
+  // shows completed level screen
   if (stage === 3) {
     completedLevelScreen();
   }
 }
 
-function keyPressed() {
-  // change grid based on key press and switch to game stage
-  if (key === "1") {
-    levelOne();
-    stage = 2;
-    startTime = millis(); // start the timer
-  } 
-  
-  if (key === "2") {
-    levelTwo();
-    stage = 2;
-    startTime = millis();
-  } 
-  
-  if (key === "3") {
-    levelThree();
-    stage = 2;
-    startTime = millis();
-  } 
-  
-  if (key === "4") {
-    levelFour();
-    stage = 2;
-    startTime = millis();
-  } 
-  
-  if (key === "5") {
-    levelFive();
-    stage = 2;
-    startTime = millis();
-  }
-}
-
 function startScreen() {
+  // start screen text, pictures, and instructions
   background(0);
   textSize(22);
   text('🔴🟡🟢🔵🔴🟡🟢🔵🔴🟡🟢🔵🔴🟡🟢🔵', 250, 30);
   text('🔴🟡🟢🔵🔴🟡🟢🔵🔴🟡🟢🔵🔴🟡🟢🔵', 250, 470);
 
+  // title
   textSize(50);
   noStroke();
   textStyle(BOLD);
@@ -102,55 +78,50 @@ function startScreen() {
   let word = "FLOW FREE";
   
   for (let i = 0; i < word.length; i++) {
-    fill(colors[i % colors.length]);  // Cycle through the colors
+    fill(colors[i % colors.length]);
     text(word[i], textWidth(word) / 2.5 + textWidth(word.substring(0, i)), height / 3 - 30);
   }
 
-    // Draw the "Play Again" button
-  fill(255, 0, 0);  // Red background
-  rect(150, 200, 200, 50, 10);  // Draw the rectangle with rounded corners
-
-  // Add white border to the button
+  // start button
+  fill(255, 0, 0);
+  rect(150, 200, 200, 50, 10);
   stroke(255);
   strokeWeight(2);
   noFill();
   rect(150, 200, 200, 50, 10, 10);
-
-  // ellipse(width / 2, 2 * height / 3, 150, 150);
 
   fill(255);
   textSize(15);
   noStroke();
   text("CLICK TO START", width / 2, 225);
   
+  // instructions
   fill(255);
   textSize(13);
-  // textAlign(CENTER, CENTER);
-
   text('Connect dots of the same color by clicking and dragging your mouse.', 250, 300);
   text('Do not let the colors intersect and make sure that the entire grid is filled.', 250, 330);
   
   textSize(22);
   text('🎮HAVE FUN PLAYING!🎮', 250, 400);
 
-  // transition to level selection screen when clicked
+  // switch to stage 1
   if (mouseIsPressed) {
-    stage = 1; // move to level selection screen
+    stage = 1;
   }
 }
 
 function levelScreen() {
+  // level selection screen text and instructions
   background(0);
-  
   fill(255);
   textSize(25);
   textAlign(CENTER, CENTER);
-  text("PRESS A NUMBER TO SELECT A LEVEL", width / 2, 80);
+  text("PRESS A NUMBER TO SELECT A LEVEL", width / 2, 70);
 
-  // colors for the background rectangles
+  // colors for the rectangles
   let colors = ['red', 'yellow', 'green', 'blue'];
   
-  // positions for each level option
+  // text and position for each level option
   let levels = [
     { text: "1: Level 1 (4x4)", y: 140 },
     { text: "2: Level 2 (5x5)", y: 210 },
@@ -159,24 +130,22 @@ function levelScreen() {
     { text: "5: Level 5 (8x8)", y: 420 }
   ];
 
-  // draw the colored rectangles and text for each level
+  // displaying the colored rectangles and text for each level
   for (let i = 0; i < levels.length; i++) {
     // draw the rectangle behind the text
-    fill(colors[i % colors.length]);  // cycle through colors
-    let rectWidth = textWidth(levels[i].text) + 40;  // add padding around the text (increased padding)
+    fill(colors[i % colors.length]);
+    let rectWidth = textWidth(levels[i].text) + 40;
     let rectHeight = 50;
     let rectX = width / 2 - rectWidth / 2;
     let rectY = levels[i].y - rectHeight / 2;
     
-    rect(rectX, rectY, rectWidth, rectHeight, 10);  // draw rounded rectangle
-    
-    // draw the white border around the rectangle
+    rect(rectX, rectY, rectWidth, rectHeight, 10); 
     stroke(255);
     strokeWeight(2);
     noFill();
-    rect(rectX, rectY, rectWidth, rectHeight, 10);  // Draw border
+    rect(rectX, rectY, rectWidth, rectHeight, 10);
     
-    // draw the text on top of the rectangle
+    // display text
     noStroke();
     fill(0);
     textSize(25);
@@ -184,19 +153,8 @@ function levelScreen() {
   }
 }
 
-function displayTimer() {
-  // calculate elapsed time
-  elapsedTime = int((millis() - startTime) / 1000);  // convert to seconds
-  
-  // timer characteristics
-  fill(255);
-  textSize(27);
-  textAlign(RIGHT, TOP);
-  text("Time: " + elapsedTime + "s", width - 20, 15);
-}
-
-
 function completedLevelScreen() {
+  // completed level screen text, pictures, timer, and instructions
   background(0);
   textSize(22);
   text('🔴🟡🟢🔵🔴🟡🟢🔵🔴🟡🟢🔵🔴🟡🟢🔵', 250, 30);
@@ -206,121 +164,69 @@ function completedLevelScreen() {
   textAlign(CENTER, CENTER);
   text("LEVEL COMPLETED!", width / 2, 150);
 
-  // Calculate the time taken to complete the level
-  let timeTaken = (levelCompletionTime - levelStartTime) / 1000; // Convert milliseconds to seconds
-
-  // Display the time taken (rounded to nearest integer)
+  // calculate and display the time taken to complete the level
+  let timeTaken = (levelCompletionTime - levelStartTime) / 1000;
   textSize(25);
-  text(`Time taken to complete level: ${Math.round(timeTaken)-2} seconds`, width / 2, height / 2);
+  text(`Time taken to complete level: ${Math.round(timeTaken)-2} seconds`, width / 2, height / 2); // subtracts 2 second wait
   
-  // Draw the "Play Again" button
-  fill(255, 0, 0);  // Red background
-  rect(150, 320, 200, 50, 10);  // Draw the rectangle with rounded corners
-  
-  // Add white border to the button
+  // play again button
+  fill(255, 0, 0);
+  rect(150, 320, 200, 50, 10);
   stroke(255);
   strokeWeight(2);
   noFill();
   rect(150, 320, 200, 50, 10, 10);
 
-  // Display the text on the button
   noStroke();
   fill(255);
   textSize(16);
   text("Click here to play again!", width / 2, 347);
   
+  // switch to stage 1
   if (mouseIsPressed) {
     stage = 1; // move to level selection screen
   }
 }
 
-function displayGrid() {
-  background(0);
-  const GRID_ROWS = grid.length;
-  const GRID_COLUMNS = grid[0].length;
-
-  // Calculate the top-left corner to center the grid
-  const offsetX = (width - GRID_COLUMNS * cellSize) / 2;
-  const offsetY = (height - GRID_ROWS * cellSize) / 2;
-
-  strokeWeight(1);
-  for (let y = 0; y < GRID_ROWS; y++) {
-    for (let x = 0; x < GRID_COLUMNS; x++) {
-      // Draw black squares as the grid background
-      fill("black");
-      stroke(255);
-      square(offsetX + x * cellSize, offsetY + y * cellSize, cellSize);
-    
-      noStroke(); 
-
-      // Draw colored circles based on grid values
-      if (grid[y][x] === RED_DOT) {
-        fill("red");
-        ellipse(
-          offsetX + x * cellSize + cellSize / 2,
-          offsetY + y * cellSize + cellSize / 2,
-          cellSize * 0.8,
-          cellSize * 0.8
-        );
-      } 
-      
-      else if (grid[y][x] === BLUE_DOT) {
-        fill("blue");
-        ellipse(
-          offsetX + x * cellSize + cellSize / 2,
-          offsetY + y * cellSize + cellSize / 2,
-          cellSize * 0.8,
-          cellSize * 0.8
-        );
-      } 
-      
-      else if (grid[y][x] === GREEN_DOT) {
-        fill("green");
-        ellipse(
-          offsetX + x * cellSize + cellSize / 2,
-          offsetY + y * cellSize + cellSize / 2,
-          cellSize * 0.8,
-          cellSize * 0.8
-        );
-      } 
-      
-      else if (grid[y][x] === YELLOW_DOT) {
-        fill("yellow");
-        ellipse(
-          offsetX + x * cellSize + cellSize / 2,
-          offsetY + y * cellSize + cellSize / 2,
-          cellSize * 0.8,
-          cellSize * 0.8
-        );
-      }
-    }
+function keyPressed() {
+  // level one selection and begin timer
+  if (key === "1") {
+    levelOne();
+    stage = 2;
+    startTime = millis(); 
+  } 
+  
+  // level two selection and begin timer
+  if (key === "2") {
+    levelTwo();
+    stage = 2;
+    startTime = millis();
+  } 
+  
+  // level three selection and begin timer
+  if (key === "3") {
+    levelThree();
+    stage = 2;
+    startTime = millis();
+  } 
+  
+  // level four selection and begin timer
+  if (key === "4") {
+    levelFour();
+    stage = 2;
+    startTime = millis();
+  } 
+  
+  // level five selection and begin timer
+  if (key === "5") {
+    levelFive();
+    stage = 2;
+    startTime = millis();
   }
 }
 
-function checkCompletion() {
-  for (let y = 0; y < grid.length; y++) {
-    for (let x = 0; x < grid[0].length; x++) {
-      if (grid[y][x] !== completedGrid[y][x]) {
-        return false; // Grid does not match the completed grid
-      }
-    }
-  }
-  // if the grid matches the completed grid, start the 2-second wait
-  if (!waitForCompletion) {
-    waitForCompletion = true;
-    levelCompletionTime = millis();  // store the time when the level is completed
-  }
-
-  // If 2 seconds have passed, transition to the completed level screen
-  if (waitForCompletion && millis() - levelCompletionTime >= 2000) {
-    stage = 3;  // switch to the "Completed Level" screen
-  }
-
-  return true;
-}
-
-// Define grids for each level
 function levelOne() {
+  // level one uncompleted and completed grid
   grid = [
     [4, 0, 3, 0],
     [1, 0, 4, 0],
@@ -337,6 +243,7 @@ function levelOne() {
 }
 
 function levelTwo() {
+  // level two uncompleted and completed grid
   grid = [
     [1, 0, 0, 4, 0],
     [0, 2, 0, 3, 0],
@@ -355,6 +262,7 @@ function levelTwo() {
 }
 
 function levelThree() {
+  // level three uncompleted and completed grid
   grid = [
     [0, 2, 1, 0, 0, 0],
     [0, 0, 0, 0, 4, 0],
@@ -375,6 +283,7 @@ function levelThree() {
 }
 
 function levelFour() {
+  // level four uncompleted and completed grid
   grid = [
     [0, 0, 0, 0, 0, 0, 1],
     [0, 0, 0, 0, 3, 0, 0],
@@ -397,6 +306,7 @@ function levelFour() {
 }
 
 function levelFive() {
+  // level five uncompleted and completed grid
   grid = [
     [0, 0, 0, 0, 3, 0, 0, 0],
     [0, 2, 0, 0, 0, 0, 2, 0],
@@ -420,18 +330,119 @@ function levelFive() {
   ];
 }
 
+function displayGrid() {
+  // loops through grid to display the proper colored dots
+  background(0);
+  const GRID_ROWS = grid.length;
+  const GRID_COLUMNS = grid[0].length;
+  const offsetX = (width - GRID_COLUMNS * cellSize) / 2;
+  const offsetY = (height - GRID_ROWS * cellSize) / 2;
+
+  strokeWeight(1);
+  for (let y = 0; y < GRID_ROWS; y++) {
+    for (let x = 0; x < GRID_COLUMNS; x++) {
+
+      // black squares for grid 
+      fill("black");
+      stroke(255);
+      square(offsetX + x * cellSize, offsetY + y * cellSize, cellSize);
+    
+      // draw colored dots based on grid values
+      noStroke(); 
+
+      // red dot
+      if (grid[y][x] === RED_DOT) {
+        fill("red");
+        ellipse(
+          offsetX + x * cellSize + cellSize / 2,
+          offsetY + y * cellSize + cellSize / 2,
+          cellSize * 0.8,
+          cellSize * 0.8
+        );
+      } 
+      
+      // blue dot
+      else if (grid[y][x] === BLUE_DOT) {
+        fill("blue");
+        ellipse(
+          offsetX + x * cellSize + cellSize / 2,
+          offsetY + y * cellSize + cellSize / 2,
+          cellSize * 0.8,
+          cellSize * 0.8
+        );
+      } 
+      
+      // green dot
+      else if (grid[y][x] === GREEN_DOT) {
+        fill("green");
+        ellipse(
+          offsetX + x * cellSize + cellSize / 2,
+          offsetY + y * cellSize + cellSize / 2,
+          cellSize * 0.8,
+          cellSize * 0.8
+        );
+      } 
+      
+      // yellow dot
+      else if (grid[y][x] === YELLOW_DOT) {
+        fill("yellow");
+        ellipse(
+          offsetX + x * cellSize + cellSize / 2,
+          offsetY + y * cellSize + cellSize / 2,
+          cellSize * 0.8,
+          cellSize * 0.8
+        );
+      }
+    }
+  }
+}
+
+function displayTimer() {
+  // calculates the time
+  elapsedTime = int((millis() - startTime) / 1000);
+  
+  // timer charactristics
+  fill(255);
+  textSize(27);
+  textAlign(RIGHT, TOP);
+  text("Time: " + elapsedTime + "s", width - 20, 15);
+}
+
+function checkCompletion() {
+  // compares the uncompleted grid to the completed grid to determine if the level is complete
+  for (let y = 0; y < grid.length; y++) {
+    for (let x = 0; x < grid[0].length; x++) {
+      if (grid[y][x] !== completedGrid[y][x]) {
+        return false; // grid is not completed
+      }
+    }
+  }
+  // if the grid matches the completed grid, start 2-second wait
+  if (!waitForCompletion) {
+    waitForCompletion = true;
+    levelCompletionTime = millis();  // store the time it took to complete the level
+  }
+
+  // if 2 seconds have passed, switch to the completed level screen
+  if (waitForCompletion && millis() - levelCompletionTime >= 2000) {
+    stage = 3;
+  }
+
+  return true;
+}
+
 function mousePressed() {
+  // determines if player clicks on a dot
   const GRID_ROWS = grid.length;
   const GRID_COLUMNS = grid[0].length;
 
   const offsetX = (width - GRID_COLUMNS * cellSize) / 2;
   const offsetY = (height - GRID_ROWS * cellSize) / 2;
 
-  // get the tile position on the grid
   const gridX = Math.floor((mouseX - offsetX) / cellSize);
   const gridY = Math.floor((mouseY - offsetY) / cellSize);
 
-  // select the color when clicking on a color tile
+  // selects the color of the dot being clicked on and stops the drag if it goes over a different colored dot
   if (gridY >= 0 && gridY < GRID_ROWS && gridX >= 0 && gridX < GRID_COLUMNS) {
     if (grid[gridY][gridX] === RED_DOT) {
       selectedColor = RED_DOT;
@@ -456,13 +467,13 @@ function mousePressed() {
 }
 
 function mouseDragged() {
+  // uses selected color and draws other dots when the mouse is dragged
   const GRID_ROWS = grid.length;
   const GRID_COLUMNS = grid[0].length;
 
   const offsetX = (width - GRID_COLUMNS * cellSize) / 2;
   const offsetY = (height - GRID_ROWS * cellSize) / 2;
 
-  // get the tile position on the grid
   const gridX = Math.floor((mouseX - offsetX) / cellSize);
   const gridY = Math.floor((mouseY - offsetY) / cellSize);
 
@@ -474,13 +485,14 @@ function mouseDragged() {
     selectedColor !== null &&
     !dragCancelled
   ) {
+
+    // if a different color is encountered, stop filling and cancel the drag
     if (grid[gridY][gridX] !== EMPTY_TILE && grid[gridY][gridX] !== selectedColor) {
-      // if a different color is encountered, stop filling and cancel the drag
       dragCancelled = true;
-      return; // stop the drag action
+      return;
     }
 
-    // if the tile is empty, fill it with the selected color
+    // if the tile is empty, draw dot using selected color
     if (grid[gridY][gridX] === EMPTY_TILE) {
       grid[gridY][gridX] = selectedColor;
     }
