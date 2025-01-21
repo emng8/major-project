@@ -21,6 +21,9 @@ let dragCancelled = false; // tracks if the drag path is interrupted
 let startTime = 0; // timer start time in millis
 let elapsedTime = 0; // elapsed time in seconds
 
+let levelCompletionTime = 0;  // to store the time when the level is completed
+let waitForCompletion = false;  // flag to indicate whether to wait for 5 seconds
+
 function setup() {
   createCanvas(500, 500);
   noStroke();
@@ -248,7 +251,17 @@ function checkCompletion() {
       }
     }
   }
-  stage = 3; // change to completed level screen if it matches
+  // if the grid matches the completed grid, start the 2-second wait
+  if (!waitForCompletion) {
+    waitForCompletion = true;
+    levelCompletionTime = millis();  // store the time when the level is completed
+  }
+
+  // If 2 seconds have passed, transition to the completed level screen
+  if (waitForCompletion && millis() - levelCompletionTime >= 2000) {
+    stage = 3;  // switch to the "Completed Level" screen
+  }
+
   return true;
 }
 
