@@ -77,17 +77,24 @@ function keyPressed() {
 
 function startScreen() {
   background(0);
-  fill(255);
   textSize(50);
   textAlign(CENTER, CENTER);
-  text("FLOW FREE", width / 2, height / 3);
+  let colors = ['red', 'yellow', 'green', 'blue'];
+  let word = "FLOW FREE";
+  
+  for (let i = 0; i < word.length; i++) {
+    fill(colors[i % colors.length]);  // Cycle through the colors
+    text(word[i], textWidth(word) / 2.5 + textWidth(word.substring(0, i)), height / 3);
+  }
 
   fill(255);
   ellipse(width / 2, 2 * height / 3, 150, 150);
 
-  textSize(20);
-  text("Click to start", width / 2, 2 * 150);
+  fill(0);
+  textSize(15);
+  text("CLICK TO START", width / 2, 2 * height / 3);
 
+  // transition to level selection screen when clicked
   if (mouseIsPressed) {
     stage = 1; // move to level selection screen
   }
