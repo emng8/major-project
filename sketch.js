@@ -25,6 +25,8 @@ let levelStartTime = 0; // to store the time when the level starts
 let levelCompletionTime = 0;  // to store the time when the level is completed
 let waitForCompletion = false;  // flag to indicate whether to wait for 5 seconds
 
+// let buttonRect = { x: 150, y: 320, width: 200, height: 50 }; // coordinates and dimensions for the "play again" button
+
 function setup() {
   createCanvas(500, 500);
   noStroke();
@@ -175,17 +177,40 @@ function displayTimer() {
 
 function completedLevelScreen() {
   background(0);
+  textSize(22);
+  text('🔴🟡🟢🔵🔴🟡🟢🔵🔴🟡🟢🔵🔴🟡🟢🔵', 250, 30);
+  text('🔴🟡🟢🔵🔴🟡🟢🔵🔴🟡🟢🔵🔴🟡🟢🔵', 250, 470);
   fill(255);
-  textSize(50);
+  textSize(45);
   textAlign(CENTER, CENTER);
-  text("LEVEL COMPLETED!", width / 2, height / 2 - 50);
+  text("LEVEL COMPLETED!", width / 2, 150);
 
   // Calculate the time taken to complete the level
   let timeTaken = (levelCompletionTime - levelStartTime) / 1000; // Convert milliseconds to seconds
 
   // Display the time taken (rounded to nearest integer)
-  textSize(30);
-  text(`Time: ${Math.round(timeTaken)} seconds`, width / 2, height / 2 + 50);
+  textSize(25);
+  text(`Time taken to complete level: ${Math.round(timeTaken)-2} seconds`, width / 2, height / 2);
+  
+   // Draw the "Play Again" button
+  fill(255, 0, 0);  // Red background
+  rect(150, 320, 200, 50, 10);  // Draw the rectangle with rounded corners
+  
+  // Add white border to the button
+  stroke(255);
+  strokeWeight(2);
+  noFill();
+  rect(150, 320, 200, 50, 10, 10);
+
+  // Display the text on the button
+  noStroke();
+  fill(255);
+  textSize(17);
+  text("Click here to play again!", width / 2, 347);
+  
+  if (mouseIsPressed) {
+    stage = 1; // move to level selection screen
+  }
 }
 
 function displayGrid() {
